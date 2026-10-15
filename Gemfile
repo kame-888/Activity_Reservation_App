@@ -23,6 +23,8 @@ gem "fiddle"
 
 gem "bullet"
 
+gem "json", "~> 2.9.1"
+
 # 検索機能
 gem "ransack"
 
