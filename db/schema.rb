@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_16_122027) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_17_124613) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_16_122027) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "time_slots", force: :cascade do |t|
+    t.integer "activity_id", null: false
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.integer "status", default: 0, null: false
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id", "starts_at"], name: "index_time_slots_on_activity_id_and_starts_at"
+    t.index ["activity_id"], name: "index_time_slots_on_activity_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -64,4 +76,5 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_16_122027) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "time_slots", "activities"
 end
